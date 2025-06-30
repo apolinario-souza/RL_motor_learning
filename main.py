@@ -104,8 +104,8 @@ while True:
     centro_x, centro_y = largura // 2, altura // 2
 
     # Desenhar a cruz no centro da tela
-    cv2.line(frame, (centro_x - 20, centro_y), (centro_x + 20, centro_y), (0, 0, 255), 2)
-    cv2.line(frame, (centro_x, centro_y - 20), (centro_x, centro_y + 20), (0, 0, 255), 2)
+    cv2.line(frame, (centro_x - 20, centro_y), (centro_x + 20, centro_y), (75, 0, 130), 2)
+    cv2.line(frame, (centro_x, centro_y - 20), (centro_x, centro_y + 20), (75, 0, 130), 2)
 
     # Exibir os pontos clicados como círculos verdes
     for ponto in pontos:
@@ -114,7 +114,7 @@ while True:
             cv2.putText(frame, f"erro: {distancia_cruz_centimetros:.2f}cm", (50, 50),               # Posição (x, y)
                         cv2.FONT_HERSHEY_SIMPLEX,           # Fonte
                         1,                                  # Tamanho do texto
-                        (0, 0, 255),                        # Cor (B, G, R) -> vermelho
+                        (75, 0, 130),                        # Cor (B, G, R) -> vermelho
                         2,                                  # Espessura da linha
                         cv2.LINE_AA)
         if len (erros)> 0:            
@@ -131,7 +131,7 @@ while True:
             cv2.putText(frame, resposta, (800, 50),               # Posição (x, y)
                         cv2.FONT_HERSHEY_SIMPLEX,           # Fonte
                         1,                                  # Tamanho do texto
-                        (0, 0, 255),                        # Cor (B, G, R) -> vermelho
+                        (75, 0, 130),                        # Cor (B, G, R) -> vermelho
                         2,                                  # Espessura da linha
                         cv2.LINE_AA)
             
@@ -150,6 +150,9 @@ while True:
 # Libera a câmera e fecha as janelas
 camera.release()
 cv2.destroyAllWindows()
+# Salva o frame como imagem
+cv2.imwrite("resultados/suj_"+str(suj)+"_bloco_"+str(bloco)+".png", frame)
+
 df= pd.DataFrame({
     'erro_radial_cm': erros,
     'p_bola_x_px': p_bola_x,
