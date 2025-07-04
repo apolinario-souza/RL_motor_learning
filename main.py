@@ -10,7 +10,7 @@ import cv2
 import math
 import pandas as pd
 from variaveis import tamanho_quadrado_real, suj,bloco, n_tt, media, desvio_padrao, fator_do_dp, cam, altura_da_tela,largura_da_tela
-
+import numpy as np
 # Lista para armazenar os pontos clicados
 pontos = []
 distancia_pixels = None  # Definido fora da função
@@ -165,3 +165,5 @@ df= pd.DataFrame({
 df.to_excel("resultados/suj_"+str(suj)+"_bloco_"+str(bloco)+".xlsx", index=False)
 
 
+print("Media:"+str(np.mean(erros)))
+print("Desvio padrao:"+str(np.std(erros)))
