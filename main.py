@@ -38,8 +38,8 @@ def clique(event, x, y, flags, param):
         
         # Se já tiver clicado em 4 pontos, calcular a conversão
         if len(pontos) >= 4:
-            if len (pontos) ==4:              
-
+            if len (pontos) ==4: 
+                
                 # Calcular as distâncias entre os pontos (usando apenas dois pontos opostos)
                 distancia_pixels = math.sqrt((pontos[0][0] - pontos[2][0]) ** 2 + (pontos[0][1] - pontos[2][1]) ** 2)
                 
@@ -108,9 +108,14 @@ while True:
     cv2.line(frame, (centro_x, centro_y - 20), (centro_x, centro_y + 20), (75, 0, 130), 2)
 
     # Exibir os pontos clicados como círculos verdes
-    for ponto in pontos:
-        cv2.circle(frame, ponto, 5, (0, 0, 255), -1)
-        if len(pontos) >4:
+    for i, ponto in enumerate(pontos):
+        if i < 4:
+            # Pontos de calibração (verdes)
+            cv2.circle(frame, ponto, 5, (75, 0, 130), -1)
+        else:
+            # Tentativas (vermelhos)
+            cv2.circle(frame, ponto, 5, (0, 0, 255), -1)
+        if len(pontos) >4:            
             cv2.putText(frame, f"erro: {distancia_cruz_centimetros:.2f}cm", (50, 50),               # Posição (x, y)
                         cv2.FONT_HERSHEY_SIMPLEX,           # Fonte
                         1,                                  # Tamanho do texto
